@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BMI Calculator</title>
+</head>
+<body>
+
+  <p>
+    Your Weight(kg)
+    <input placeholder="Input weight" class="js-input-weight">
+  </p>
+  <p>
+    Your Height(cm)
+    <input placeholder="Input height" class="js-input-height">
+  </p>
+
+  <p>
+    <button onclick="calculation()">Calculate BMI</button>
+  </p>
+  <p class="js-result"></p>
+  <script>
+    let BMI = 0
+    function calculation(){
+      const inputWeightElemet = document.querySelector('.js-input-weight');
+      const weight = Number(inputWeightElemet.value);
+
+      const inputHeightElemet = document.querySelector('.js-input-height');
+      const height = Number(inputHeightElemet.value)/100;
+
+      BMI = (weight/(height*height)).toFixed(2);
+
+      inputWeightElemet.value = '';
+      inputHeightElemet.value = '';
+      
+      displayResult();
+    }
+
+    function displayResult(){
+      document.querySelector('.js-result').innerHTML = `Your BMI is: ${BMI}`
+    }
+  </script>
+</body>
+</html>
