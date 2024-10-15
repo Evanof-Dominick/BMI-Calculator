@@ -1,42 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BMI Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    .js-input-weight,
+    .js-input-height {
+      height: 35px;
+      width: 180px;
+      border-width: 2px;
+      border-radius: 5px;
+      padding: 5px;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    .js-input-weight {
+      border-color: rgb(0, 68, 255);
+      background-color: rgb(142, 252, 252);
+    }
+
+    .js-input-height {
+      border-color: rgb(255, 0, 0);
+      background-color: rgb(250, 118, 118);
+    }
+
+    .calculate {
+      padding: 10px 20px;
+      border-width: 2px;
+      border-color: rgb(0, 255, 157);
+      border-radius: 20px;
+      background-color: rgb(140, 244, 202);
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .calculate:hover {
+      background-color: rgb(0, 255, 137);
+      transform: scale(1.05);
+    }
+
+    .js-result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <h2>Welcome To BMI Calculator</h2>
+    <p>
+      Your Weight (kg)
+      <input placeholder="Input weight" class="js-input-weight" type="number">
+    </p>
+    <p>
+      Your Height (cm)
+      <input placeholder="Input height" class="js-input-height" type="number">
+    </p>
 
-  <p>
-    Your Weight(kg)
-    <input placeholder="Input weight" class="js-input-weight">
-  </p>
-  <p>
-    Your Height(cm)
-    <input placeholder="Input height" class="js-input-height">
-  </p>
+    <p>
+      <button onclick="calculation()" class="calculate">Calculate BMI</button>
+    </p>
+    <p class="js-result"></p>
+  </div>
 
-  <p>
-    <button onclick="calculation()">Calculate BMI</button>
-  </p>
-  <p class="js-result"></p>
   <script>
-    let BMI = 0
-    function calculation(){
-      const inputWeightElemet = document.querySelector('.js-input-weight');
-      const weight = Number(inputWeightElemet.value);
+    let BMI = 0;
+    function calculation() {
+      const inputWeightElement = document.querySelector('.js-input-weight');
+      const weight = Number(inputWeightElement.value);
 
-      const inputHeightElemet = document.querySelector('.js-input-height');
-      const height = Number(inputHeightElemet.value)/100;
+      const inputHeightElement = document.querySelector('.js-input-height');
+      const height = Number(inputHeightElement.value) / 100;
 
-      BMI = (weight/(height*height)).toFixed(2);
+      BMI = (weight / (height * height)).toFixed(2);
 
-      inputWeightElemet.value = '';
-      inputHeightElemet.value = '';
-      
+      inputWeightElement.value = '';
+      inputHeightElement.value = '';
+
       displayResult();
     }
 
-    function displayResult(){
-      document.querySelector('.js-result').innerHTML = `Your BMI is: ${BMI}`
+    function displayResult() {
+      if (isNaN(BMI)) {
+        document.querySelector('.js-result').innerHTML = `Please input valid numbers!`;
+      } else {
+        document.querySelector('.js-result').innerHTML = `Your BMI is: ${BMI}`;
+      }
     }
   </script>
 </body>
